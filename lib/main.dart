@@ -111,17 +111,17 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 const MaterialColor primaryDarkGrey = MaterialColor(
-  0xFF282425,
+  0xFF333333,
   <int, Color>{
-    50: Color(0xFF282425),
-    100: Color(0xFF282425),
-    200: Color(0xFF282425),
-    300: Color(0xFF282425),
-    400: Color(0xFF282425),
-    500: Color(0xFF282425),
-    600: Color(0xFF282425),
-    700: Color(0xFF282425),
-    800: Color(0xFF282425),
-    900: Color(0xFF282425),
+    50: Color(0xFF333333),
+    100: Color(0xFF333333),
+    200: Color(0xFF333333),
+    300: Color(0xFF333333),
+    400: Color(0xFF333333),
+    500: Color(0xFF333333),
+    600: Color(0xFF333333),
+    700: Color(0xFF333333),
+    800: Color(0xFF333333),
+    900: Color(0xFF333333),
   },
 );
