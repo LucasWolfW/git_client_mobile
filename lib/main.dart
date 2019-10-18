@@ -124,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       style: TextStyle(
                         decoration: TextDecoration.none,
                         color: Colors.white,
-                        fontSize:20,
+                        fontSize: 20,
                       ),
                     ),
                     TextSpan(
@@ -132,15 +132,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       style: TextStyle(
                         decoration: TextDecoration.none,
                         color: Colors.white,
-                        fontSize:10,
-
+                        fontSize: 10,
                       ),
                     ),
                   ],
                 ),
-                ),
+              ),
               decoration: BoxDecoration(
-              color: primaryDarkGrey,
+                color: primaryDarkGrey,
               ),
             ),
             ListTile(
