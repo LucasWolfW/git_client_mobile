@@ -115,9 +115,32 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Text('Git Client Mobile\nyour solution for Git on mobile devices.'),
+              child: RichText(
+                text: TextSpan(
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'Git Client Mobile \n',
+                      style: TextStyle(
+                        decoration: TextDecoration.none,
+                        color: Colors.white,
+                        fontSize:20,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Your Git Solution For Mobile Application.\n',
+                      style: TextStyle(
+                        decoration: TextDecoration.none,
+                        color: Colors.white,
+                        fontSize:10,
+
+                      ),
+                    ),
+                  ],
+                ),
+                ),
               decoration: BoxDecoration(
-                color: primaryDarkGrey,
+              color: primaryDarkGrey,
               ),
             ),
             ListTile(
