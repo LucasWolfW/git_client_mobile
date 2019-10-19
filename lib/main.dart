@@ -6,7 +6,7 @@ class GitClientMobile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Git Client Mobile',
       theme: ThemeData(
         primarySwatch: primaryDarkGrey,
       ),
