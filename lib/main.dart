@@ -84,24 +84,66 @@ class _MyHomePageState extends State<MyHomePage> {
       drawer: Drawer(
         child: Container(
           child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                child: ListView(),
+            padding: EdgeInsets.all(0),
+            children: [
+              UserAccountsDrawerHeader(
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/AppBarLogo.png'),
-                      fit: BoxFit.fitWidth),
+                    image: DecorationImage(
+                        image: AssetImage('assets/AppBarLogo.png'),
+                        fit: BoxFit.fitWidth)),
+                accountEmail: Text("git.test@gmail.com",
+                    style: TextStyle(color: Colors.grey[100], fontSize: 15)),
+                accountName: Text("Git Test",
+                    style: TextStyle(color: Colors.grey[100], fontSize: 15)),
+                currentAccountPicture: CircleAvatar(
+                  child: Text("GT", style: TextStyle(fontSize: 25)),
                 ),
               ),
               ListTile(
-                title: Text('Projects'),
+                leading: Icon(Icons.home),
+                title: Text("Home"),
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: Text('Settings'),
+                leading: Icon(Icons.dashboard),
+                title: Text("Projects"),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.settings),
+                title: Text("Settings"),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.info),
+                title: Text("About Us"),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.share),
+                title: Text("Share with Friends"),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.rate_review),
+                title: Text("Rate and Review"),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.flag),
+                title: Text("Privacy Policy"),
                 onTap: () {
                   Navigator.pop(context);
                 },
