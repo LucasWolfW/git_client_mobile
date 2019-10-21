@@ -28,58 +28,59 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: NestedScrollView(
-          headerSliverBuilder: (context, isInnerBoxScroll) {
-            return [
-              RoundedFloatingAppBar(
-                floating: true,
-                snap: true,
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16,horizontal: 45),
-                      child: Text(
-                        "Git Mobile",
-                        style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                      ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, isInnerBoxScroll) {
+          return [
+            RoundedFloatingAppBar(
+              floating: true,
+              snap: true,
+              title: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 16, horizontal: 45),
+                    child: Text(
+                      "Git Mobile",
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                     ),
-                  ],
-                ),
-                backgroundColor: Colors.white,
+                  ),
+                ],
               ),
-            ];
-          },
-          body: ListView(
-            children: <Widget>[
-              ListTile(
-                leading: Icon(Icons.polymer),
-                title: Text('Projeto GCS'),
-              ),
-              ListTile(
-                leading: Icon(Icons.polymer),
-                title: Text('Projeto WEB 1'),
-              ),
-              ListTile(
-                leading: Icon(Icons.polymer),
-                title: Text('Projeto Scalar'),
-              ),
-              ListTile(
-                leading: Icon(Icons.polymer),
-                title: Text('Projeto Pascal'),
-              ),
-              ListTile(
-                leading: Icon(Icons.polymer),
-                title: Text('Projeto C#'),
-              ),
-              ListTile(
-                leading: Icon(Icons.polymer),
-                title: Text('Projeto Cobol'),
-              ),
-            ],
-          ),
+              backgroundColor: Colors.white,
+            ),
+          ];
+        },
+        body: ListView(
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.polymer),
+              title: Text('Projeto GCS'),
+            ),
+            ListTile(
+              leading: Icon(Icons.polymer),
+              title: Text('Projeto WEB 1'),
+            ),
+            ListTile(
+              leading: Icon(Icons.polymer),
+              title: Text('Projeto Scalar'),
+            ),
+            ListTile(
+              leading: Icon(Icons.polymer),
+              title: Text('Projeto Pascal'),
+            ),
+            ListTile(
+              leading: Icon(Icons.polymer),
+              title: Text('Projeto C#'),
+            ),
+            ListTile(
+              leading: Icon(Icons.polymer),
+              title: Text('Projeto Cobol'),
+            ),
+          ],
         ),
+      ),
       drawer: Drawer(
         child: Container(
           child: ListView(
