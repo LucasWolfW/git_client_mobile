@@ -72,7 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
               backgroundColor: Colors.white,
               actions: <Widget>[
                 IconButton(
-                    icon: Icon(Icons.search,color: Colors.grey[600],),
+                    icon: Icon(
+                      Icons.search,
+                      color: Colors.grey[600],
+                    ),
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -109,6 +112,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 title: Text("Home"),
                 onTap: () {
                   Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.search),
+                title: Text("Search"),
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SearchList(),
+                      ));
                 },
               ),
               ListTile(
