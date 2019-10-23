@@ -104,7 +104,8 @@ class _SearchState extends State<SearchList> {
 
   Widget buildBody(BuildContext context) {
     if (_isSearching) {
-      return CenterTitle('Searching Github...');
+      return Container(
+          alignment: Alignment.center, child: Icon(Icons.timelapse));
     } else if (_error != null) {
       return CenterTitle(_error);
     } else {
