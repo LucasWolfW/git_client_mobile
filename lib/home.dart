@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:git_client_mobile/api.dart';
 import 'package:git_client_mobile/color.dart';
+import 'package:git_client_mobile/item.dart';
+import 'package:git_client_mobile/repo.dart';
 import 'package:rounded_floating_app_bar/rounded_floating_app_bar.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -11,6 +14,37 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Repo> _repos = List();
+  bool _isFetching = false;
+  String _error;
+
+  @override
+  void initState() {
+    super.initState();
+    loadTrendingRepos();
+  }
+
+  void loadTrendingRepos() async {
+    setState(
+      () {
+        _isFetching = true;
+        _error = null;
+      },
+    );
+
+    final repos = await Api.getTrendingRepositories();
+    setState(
+      () {
+        _isFetching = false;
+        if (repos != null) {
+          this._repos = repos;
+        } else {
+          _error = 'Error fetching repos';
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,34 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ];
         },
-        body: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.polymer),
-              title: Text('Projeto GCS'),
-            ),
-            ListTile(
-              leading: Icon(Icons.polymer),
-              title: Text('Projeto WEB 1'),
-            ),
-            ListTile(
-              leading: Icon(Icons.polymer),
-              title: Text('Projeto Scalar'),
-            ),
-            ListTile(
-              leading: Icon(Icons.polymer),
-              title: Text('Projeto Pascal'),
-            ),
-            ListTile(
-              leading: Icon(Icons.polymer),
-              title: Text('Projeto C#'),
-            ),
-            ListTile(
-              leading: Icon(Icons.polymer),
-              title: Text('Projeto Cobol'),
-            ),
-          ],
-        ),
+        body: buildBody(context),
       ),
       drawer: Drawer(
         child: Container(
@@ -140,5 +147,29 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  Widget buildBody(BuildContext context) {
+    if (_isFetching) {
+      return Container(
+          alignment: Alignment.center, child: Icon(Icons.timelapse));
+    } else if (_error != null) {
+      return Container(
+        alignment: Alignment.center,
+        child: Text(
+          _error,
+          style: Theme.of(context).textTheme.headline,
+          textAlign: TextAlign.center,
+        ),
+      );
+    } else {
+      return ListView.builder(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        itemCount: _repos.length,
+        itemBuilder: (BuildContext context, int index) {
+          return GithubItem(_repos[index]);
+        },
+      );
+    }
   }
 }
