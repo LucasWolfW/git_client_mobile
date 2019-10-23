@@ -3,6 +3,7 @@ import 'package:git_client_mobile/api.dart';
 import 'package:git_client_mobile/color.dart';
 import 'package:git_client_mobile/item.dart';
 import 'package:git_client_mobile/repo.dart';
+import 'package:git_client_mobile/search.dart';
 import 'package:rounded_floating_app_bar/rounded_floating_app_bar.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -69,6 +70,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
               backgroundColor: Colors.white,
+              actions: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.search,color: Colors.grey[600],),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchList(),
+                          ));
+                    }),
+              ],
             ),
           ];
         },
