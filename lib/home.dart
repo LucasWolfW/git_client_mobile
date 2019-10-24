@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 accountName: Text("Git Test",
                     style: TextStyle(color: Colors.grey[100], fontSize: 15)),
                 currentAccountPicture: CircleAvatar(
-                  child: Text("GT", style: TextStyle(fontSize: 25)),
+                  backgroundImage: AssetImage('assets/backgroundUserImage.png'),
                 ),
               ),
               ListTile(
