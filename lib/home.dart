@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:git_client_mobile/api.dart';
-import 'package:git_client_mobile/color.dart';
 import 'package:git_client_mobile/item.dart';
 import 'package:git_client_mobile/repo.dart';
 import 'package:git_client_mobile/search.dart';
+import 'package:git_client_mobile/settings.dart';
 import 'package:rounded_floating_app_bar/rounded_floating_app_bar.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -90,33 +90,59 @@ class _MyHomePageState extends State<MyHomePage> {
         body: buildBody(context),
       ),
       drawer: Drawer(
-        child: Container(
-          child: ListView(
-            padding: EdgeInsets.all(0),
-            children: [
-              UserAccountsDrawerHeader(
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/AppBarLogo.png'),
-                        fit: BoxFit.fitWidth)),
-                accountEmail: Text("git.test@gmail.com",
-                    style: TextStyle(color: Colors.grey[100], fontSize: 15)),
-                accountName: Text("Git Test",
-                    style: TextStyle(color: Colors.grey[100], fontSize: 15)),
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: AssetImage('assets/backgroundUserImage.png'),
-                ),
+        child: ListView(
+          padding: EdgeInsets.all(0),
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/AppBarLogo.png'),
+                      fit: BoxFit.fitWidth)),
+              accountEmail: Text("git.test@gmail.com",
+                  style: TextStyle(color: Colors.grey[100], fontSize: 15)),
+              accountName: Text("Git Test",
+                  style: TextStyle(color: Colors.grey[100], fontSize: 15)),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage('assets/backgroundUserImage.png'),
               ),
-              ListTile(
-                leading: Icon(Icons.home),
-                title: Text("Home"),
+            ),
+            Container(
+              child: InkResponse(
+                child: ListTile(
+                  leading: Icon(Icons.home),
+                  title: Text('Home'),
+                  dense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 0,
+                  ),
+                ),
+                highlightShape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5),
+                containedInkWell: true,
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.search),
-                title: Text("Search"),
+              margin: EdgeInsets.symmetric(
+                horizontal: 6,
+                vertical: 2,
+              ),
+            ),
+            Container(
+              child: InkResponse(
+                child: ListTile(
+                  leading: Icon(Icons.search),
+                  title: Text('Search'),
+                  dense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 0,
+                  ),
+                ),
+                highlightShape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5),
+                containedInkWell: true,
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
@@ -126,51 +152,64 @@ class _MyHomePageState extends State<MyHomePage> {
                       ));
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.dashboard),
-                title: Text("Projects"),
+              margin: EdgeInsets.symmetric(
+                horizontal: 6,
+                vertical: 2,
+              ),
+            ),
+            Container(
+              child: InkResponse(
+                child: ListTile(
+                  leading: Icon(Icons.dashboard),
+                  title: Text('Projects'),
+                  dense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 0,
+                  ),
+                ),
+                highlightShape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5),
+                containedInkWell: true,
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.settings),
-                title: Text("Settings"),
+              margin: EdgeInsets.symmetric(
+                horizontal: 6,
+                vertical: 2,
+              ),
+            ),
+            Divider(),
+            Container(
+              child: InkResponse(
+                child: ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Settings'),
+                  dense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 0,
+                  ),
+                ),
+                highlightShape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5),
+                containedInkWell: true,
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Settings(),
+                      ));
                 },
               ),
-              ListTile(
-                leading: Icon(Icons.info),
-                title: Text("About Us"),
-                onTap: () {
-                  Navigator.pop(context);
-                },
+              margin: EdgeInsets.symmetric(
+                horizontal: 6,
+                vertical: 2,
               ),
-              ListTile(
-                leading: Icon(Icons.share),
-                title: Text("Share with Friends"),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.rate_review),
-                title: Text("Rate and Review"),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                leading: Icon(Icons.flag),
-                title: Text("Privacy Policy"),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-          color: whiteGradient,
+            ),
+          ],
         ),
       ),
     );
