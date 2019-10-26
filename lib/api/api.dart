@@ -3,7 +3,7 @@ import 'dart:convert' show json, utf8;
 import 'dart:io';
 
 import 'package:date_format/date_format.dart';
-import 'package:git_client_mobile/repo.dart';
+import 'package:git_client_mobile/api/repo.dart';
 
 class Api {
   static final HttpClient _httpClient = HttpClient();

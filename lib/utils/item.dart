@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:git_client_mobile/repo.dart';
+import 'package:git_client_mobile/api/repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GithubItem extends StatelessWidget {
