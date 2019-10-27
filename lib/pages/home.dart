@@ -4,6 +4,7 @@ import 'package:git_client_mobile/utils/item.dart';
 import 'package:git_client_mobile/api/repo.dart';
 import 'package:git_client_mobile/pages/search.dart';
 import 'package:git_client_mobile/pages/settings.dart';
+import 'package:git_client_mobile/pages/projects.dart';
 import 'package:rounded_floating_app_bar/rounded_floating_app_bar.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -173,6 +174,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 containedInkWell: true,
                 onTap: () {
                   Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Projects(),
+                      ));
                 },
               ),
               margin: EdgeInsets.symmetric(
