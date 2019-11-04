@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:git_client_mobile/color.dart';
-import 'package:git_client_mobile/home.dart';
+import 'package:git_client_mobile/utils/color.dart';
+import 'package:git_client_mobile/pages/home.dart';
 
 void main() => runApp(GitClientMobile());
 

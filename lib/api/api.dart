@@ -3,7 +3,7 @@ import 'dart:convert' show json, utf8;
 import 'dart:io';
 
 import 'package:date_format/date_format.dart';
-import 'package:git_client_mobile/repo.dart';
+import 'package:git_client_mobile/api/repo.dart';
 
 class Api {
   static final HttpClient _httpClient = HttpClient();
@@ -57,6 +57,23 @@ class Api {
 
     return Repo.mapJSONStringToList(jsonResponse['items']);
   }
+
+  static Future<List<Repo>> getUserRepositories() async {
+    final uri = Uri.https(_url, '/users/viniciusbelloli/repos');
+
+    final jsonResponse = await _getJson(uri);
+    if (jsonResponse == null) {
+      return null;
+    }
+    if (jsonResponse['errors'] != null) {
+      return null;
+    }
+    if (jsonResponse['items'] == null) {
+      return List();
+    }
+
+    return Repo.mapJSONStringToList(jsonResponse['items']);
+  }  
 
   static Future<Map<String, dynamic>> _getJson(Uri uri) async {
     try {

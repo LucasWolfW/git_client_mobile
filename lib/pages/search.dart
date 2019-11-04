@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:git_client_mobile/api.dart';
-import 'package:git_client_mobile/item.dart';
-import 'package:git_client_mobile/repo.dart';
+import 'package:git_client_mobile/api/api.dart';
+import 'package:git_client_mobile/utils/item.dart';
+import 'package:git_client_mobile/api/repo.dart';
 import 'package:rounded_floating_app_bar/rounded_floating_app_bar.dart';
 
 class SearchList extends StatefulWidget {
