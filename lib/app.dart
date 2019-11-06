@@ -8,8 +8,7 @@ import 'package:git_client_mobile/pages/projects.dart';
 import 'package:rounded_floating_app_bar/rounded_floating_app_bar.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -223,8 +222,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildBody(BuildContext context) {
     if (_isFetching) {
-      return Container(
-          alignment: Alignment.center, child: Icon(Icons.timelapse));
+      return Center(
+        child: Container(
+          width: 25.0,
+          height: 25.0,
+          child: CircularProgressIndicator(),
+        ),
+      );
     } else if (_error != null) {
       return Container(
         alignment: Alignment.center,

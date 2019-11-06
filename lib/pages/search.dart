@@ -104,8 +104,13 @@ class _SearchState extends State<SearchList> {
 
   Widget buildBody(BuildContext context) {
     if (_isSearching) {
-      return Container(
-          alignment: Alignment.center, child: Icon(Icons.timelapse));
+      return Center(
+        child: Container(
+          width: 25.0,
+          height: 25.0,
+          child: CircularProgressIndicator(),
+        ),
+      );
     } else if (_error != null) {
       return CenterTitle(_error);
     } else {
