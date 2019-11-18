@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:convert' show json, utf8;
 import 'dart:io';
-
+import 'package:dio/dio.dart';
 import 'package:date_format/date_format.dart';
 import 'package:git_client_mobile/api/repo.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+Dio dio = _initDio();
 
 class Api {
   static final HttpClient _httpClient = HttpClient();
@@ -73,7 +76,7 @@ class Api {
     }
 
     return Repo.mapJSONStringToList(jsonResponse['items']);
-  }  
+  }
 
   static Future<Map<String, dynamic>> _getJson(Uri uri) async {
     try {
@@ -90,4 +93,37 @@ class Api {
       return null;
     }
   }
+}
+
+Dio _initDio() {
+  Dio dio = new Dio();
+  Dio tokenDio = new Dio();
+  String token;
+  dio.options.baseUrl = 'https://api.github.com';
+  tokenDio.options = dio.options;
+  dio.interceptors.add(InterceptorsWrapper(onRequest: (RequestOptions options) {
+    print(
+        'send request：path: ${options.path}，baseURL: ${options.baseUrl}，token: $token');
+
+    if (token == null) {
+      print('----------- no token -----------');
+      dio.lock();
+      return SharedPreferences.getInstance().then((prefs) {
+        options.headers['Authorization'] =
+            token = prefs.getString('authorization');
+
+        print('token $token');
+        return options;
+      }).whenComplete(() => dio.unlock());
+    } else {
+      options.headers['Authorization'] = token;
+      return options;
+    }
+  }, onError: (DioError error) async {
+    print('----------- http error -----------');
+    token = null;
+    return error;
+  }));
+
+  return dio;
 }
