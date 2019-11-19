@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:git_client_mobile/api/api.dart';
+import 'package:git_client_mobile/pages/Profile.dart';
 import 'package:git_client_mobile/utils/item.dart';
 import 'package:git_client_mobile/api/repo.dart';
 import 'package:git_client_mobile/pages/search.dart';
 import 'package:git_client_mobile/pages/settings.dart';
 import 'package:git_client_mobile/pages/projects.dart';
+import 'package:git_client_mobile/api/users.dart';
 import 'package:rounded_floating_app_bar/rounded_floating_app_bar.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -14,15 +16,29 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with AutomaticKeepAliveClientMixin {
+  Map<String, dynamic> userData = {};
+  UserModel userModel;
   List<Repo> _repos = List();
   bool _isFetching = false;
   String _error;
 
   @override
+  bool get wantKeepAlive => true;
+
+  _fetchUsers() async {
+    userModel = UserModel.fromJson(await fetchUsers());
+    setState(() {
+      userData = userModel.toJson();
+    });
+  }
+
+  @override
   void initState() {
     super.initState();
     loadTrendingRepos();
+    _fetchUsers();
   }
 
   void loadTrendingRepos() async {
@@ -48,6 +64,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, isInnerBoxScroll) {
@@ -94,18 +112,20 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.all(0),
           children: [
             UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage('assets/AppBarLogo.png'),
-                      fit: BoxFit.fitWidth)),
-              accountEmail: Text("git.test@gmail.com",
-                  style: TextStyle(color: Colors.grey[100], fontSize: 15)),
-              accountName: Text("Git Test",
-                  style: TextStyle(color: Colors.grey[100], fontSize: 15)),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage('assets/backgroundUserImage.png'),
-              ),
-            ),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('assets/AppBarLogo.png'),
+                        fit: BoxFit.fitWidth)),
+                accountEmail: _email(userData['email']),
+                accountName: Text(userData['username'],
+                    style: TextStyle(color: Colors.grey[100], fontSize: 15)),
+                currentAccountPicture: CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage: NetworkImage(
+                    userData['avatarUrl'],
+                  ),
+                  backgroundColor: Colors.transparent,
+                )),
             Container(
               child: InkResponse(
                 child: ListTile(
@@ -149,6 +169,34 @@ class _MyHomePageState extends State<MyHomePage> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => SearchList(),
+                      ));
+                },
+              ),
+              margin: EdgeInsets.symmetric(
+                horizontal: 6,
+                vertical: 2,
+              ),
+            ),
+            Container(
+              child: InkResponse(
+                child: ListTile(
+                  leading: Icon(Icons.person),
+                  title: Text('Profile'),
+                  dense: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 0,
+                  ),
+                ),
+                highlightShape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(5),
+                containedInkWell: true,
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfilePage(),
                       ));
                 },
               ),
@@ -246,6 +294,16 @@ class _MyHomePageState extends State<MyHomePage> {
           return GithubItem(_repos[index]);
         },
       );
+    }
+  }
+
+  Widget _email(String email) {
+    if (email == "none") {
+      return Text("Email not provided",
+          style: TextStyle(color: Colors.grey[100], fontSize: 15));
+    } else {
+      return Text(userData['email'],
+          style: TextStyle(color: Colors.grey[100], fontSize: 15));
     }
   }
 }

@@ -27,6 +27,11 @@ class UserModel {
     this.location,
     this.createdAt,
     this.email,
+    this.blog,
+    this.followers,
+    this.following,
+    this.publicRepos,
+    this.publicGists,
   });
 
   String username;
@@ -44,9 +49,9 @@ class UserModel {
     username = json['login'];
     avatarUrl = json['avatar_url'];
     createdAt = json['created_at'];
-    location = json['location'] ?? 'none';
-    email = json['email'] ?? 'none';
-    blog = json['blog'] ?? 'none';
+    location = json['location'];
+    email = json['email'];
+    blog = json['blog'];
     followers = json['followers'];
     following = json['following'];
     publicRepos = json['public_repos'];
