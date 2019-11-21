@@ -116,13 +116,14 @@ class _MyHomePageState extends State<MyHomePage>
                     image: DecorationImage(
                         image: AssetImage('assets/AppBarLogo.png'),
                         fit: BoxFit.fitWidth)),
-                accountEmail: _email(userData['email']),
-                accountName: Text(userData['username'],
+                accountEmail: Text(userData['email'] ?? 'Email not provided',
+                    style: TextStyle(color: Colors.grey[100], fontSize: 15)),
+                accountName: Text(userData['username'] ?? 'User name not provided',
                     style: TextStyle(color: Colors.grey[100], fontSize: 15)),
                 currentAccountPicture: CircleAvatar(
                   radius: 30.0,
                   backgroundImage: NetworkImage(
-                    userData['avatarUrl'],
+                    userData['avatarUrl'] ?? 'Avatar not provided',
                   ),
                   backgroundColor: Colors.transparent,
                 )),
@@ -294,16 +295,6 @@ class _MyHomePageState extends State<MyHomePage>
           return GithubItem(_repos[index]);
         },
       );
-    }
-  }
-
-  Widget _email(String email) {
-    if (email == "none") {
-      return Text("Email not provided",
-          style: TextStyle(color: Colors.grey[100], fontSize: 15));
-    } else {
-      return Text(userData['email'],
-          style: TextStyle(color: Colors.grey[100], fontSize: 15));
     }
   }
 }

@@ -64,32 +64,33 @@ class _ProfilePageState extends State<ProfilePage> {
                       AvatarIcon(
                         width: 80.0,
                         height: 80.0,
-                        avatarUrl: userData['avatarUrl'],
-                        userName: userData['username'],
+                        avatarUrl:
+                            userData['avatarUrl'] ?? 'Avatar not provided',
+                        userName:
+                            userData['username'] ?? 'User name not provided',
                       ),
                       SizedBox(width: 15.0),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            userData['username'],
+                            userData['username'] ?? 'User name not provided',
                             style: TextStyle(fontSize: 20.0),
                           ),
-                          _location(userData['location']),
-                          Text(userData['createdAt']
-                              .replaceAll('T', ' ')
-                              .replaceAll('Z', '')),
+                          Text(userData['location'] ?? 'Location not provided'),
+                          _createdAt(userData['createdAt'] ??
+                              'Created at not provided'),
                         ],
                       ),
                     ],
                   ),
                   ListTile(
                     leading: Icon(Icons.email),
-                    title: _email(userData['email']),
+                    title: Text(userData['email'] ?? 'Email not provided'),
                   ),
                   ListTile(
                     leading: Icon(Icons.link),
-                    title: _blog(userData['blog']),
+                    title: _blog(userData['blog'] ?? 'Blog not provided'),
                   ),
                   RowTileList(_list),
                 ],
@@ -99,29 +100,29 @@ class _ProfilePageState extends State<ProfilePage> {
         ));
   }
 
-  Widget _email(String email) {
-    if (email == "none") {
-      return Text("Email not provided");
-    } else {
-      return Text(userData['email']);
-    }
-  }
-
   Widget _blog(String blog) {
     if (blog == "none") {
       return Text("Blog not provided");
     } else if (blog == "") {
       return Text("Blog not provided");
     } else {
-      return Text(userData['blog']);
+      return Text(userData['blog'] ?? 'Blog not provided');
     }
   }
 
-  Widget _location(String location) {
-    if (location == null) {
-      return Text("Location not provided");
+  Widget _createdAt(String createdAt) {
+    if (createdAt == "none") {
+      return Text("Blog not provided");
+    } else if (createdAt == "") {
+      return Text("Blog not provided");
+    } else if (createdAt == null) {
+      return Text("Blog not provided");
     } else {
-      return Text(userData['location']);
+      if (createdAt.contains("T")){}
+      createdAt = createdAt.replaceAll('T', ' ').replaceAll('Z', '');
+      return Text(
+          createdAt ??
+              "Created at not provided");
     }
   }
 }
