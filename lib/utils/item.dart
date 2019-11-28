@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:git_client_mobile/api/projects.dart';
 import 'package:git_client_mobile/api/repo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -65,6 +66,84 @@ class GithubItem extends StatelessWidget {
                                 (repo.language != null) ? repo.language : '',
                                 textAlign: TextAlign.end,
                                 style: Theme.of(context).textTheme.caption)),
+                      ],
+                    ),
+                  ),
+                ]),
+          )),
+    );
+  }
+
+  _launchURL(url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+}
+
+class GithubItemProj extends StatelessWidget {
+  final ProjectsRepo reposPro;
+
+  GithubItemProj(this.reposPro);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.only(left: 13, right: 13, bottom: 5),
+      child: InkWell(
+          onTap: () {
+            _launchURL(reposPro.html_url);
+          },
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text((reposPro.name != null) ? reposPro.name : '-',
+                      style: Theme.of(context).textTheme.subhead),
+                  Padding(
+                    padding: EdgeInsets.only(top: 4.0),
+                    child: Text(
+                        reposPro.full_name != null
+                            ? reposPro.full_name
+                            : 'No desription',
+                        style: Theme.of(context).textTheme.body1),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.0),
+                    child: Row(
+                      children: <Widget>[
+                        Expanded(
+                            child: Text(
+                                (reposPro.created_at != null)
+                                    ? reposPro.created_at
+                                    : '',
+                                textAlign: TextAlign.start,
+                                style: Theme.of(context).textTheme.caption)),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.star,
+                                size: 15,
+                                color: Colors.red,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 2),
+                                child: Text(
+                                    (reposPro.updated_at != null)
+                                        ? '${reposPro.updated_at} '
+                                        : '0 ',
+                                    textAlign: TextAlign.center,
+                                    style: Theme.of(context).textTheme.caption),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),

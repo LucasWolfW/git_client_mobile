@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:date_format/date_format.dart';
 import 'package:git_client_mobile/api/repo.dart';
+import 'package:git_client_mobile/api/projects.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Dio dio = _initDio();
@@ -54,28 +55,28 @@ class Api {
     if (jsonResponse['errors'] != null) {
       return null;
     }
-    if (jsonResponse['items'] == null) {
+    if (jsonResponse['owner'] == null) {
       return List();
     }
 
-    return Repo.mapJSONStringToList(jsonResponse['items']);
+    return Repo.mapJSONStringToList(jsonResponse['{']);
   }
 
-  static Future<List<Repo>> getUserRepositories() async {
+  static Future<List<ProjectsRepo>> getUserRepositories() async {
     final uri = Uri.https(_url, '/users/viniciusbelloli/repos');
 
-    final jsonResponse = await _getJson(uri);
+    final jsonResponse = await _getJsonPro(uri);
     if (jsonResponse == null) {
       return null;
     }
-    if (jsonResponse['errors'] != null) {
+    if (jsonResponse != null) {
       return null;
     }
-    if (jsonResponse['items'] == null) {
+    if (jsonResponse == null) {
       return List();
     }
 
-    return Repo.mapJSONStringToList(jsonResponse['items']);
+    return ProjectsRepo.mapJSONStringToList(jsonResponse);
   }
 
   static Future<Map<String, dynamic>> _getJson(Uri uri) async {
@@ -87,6 +88,28 @@ class Api {
       }
 
       final responseBody = await httpResponse.transform(utf8.decoder).join();
+      final data = json.decode(responseBody);
+      
+
+      return json.decode(responseBody);
+    } on Exception catch (e) {
+      print('$e');
+      return null;
+    }
+  }
+
+  static Future<List> _getJsonPro(Uri uri) async {
+    try {
+      final httpRequest = await _httpClient.getUrl(uri);
+      final httpResponse = await httpRequest.close();
+      if (httpResponse.statusCode != HttpStatus.ok) {
+        return null;
+      }
+
+      final responseBody = await httpResponse.transform(utf8.decoder).join();
+      final data = json.decode(responseBody);
+      
+
       return json.decode(responseBody);
     } on Exception catch (e) {
       print('$e');

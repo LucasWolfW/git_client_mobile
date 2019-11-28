@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:git_client_mobile/api/api.dart';
 import 'package:git_client_mobile/utils/item.dart';
-import 'package:git_client_mobile/api/repo.dart';
+import 'package:git_client_mobile/api/projects.dart';
 import 'package:git_client_mobile/pages/search.dart';
 import 'package:rounded_floating_app_bar/rounded_floating_app_bar.dart';
 
@@ -14,7 +14,7 @@ class Projects extends StatefulWidget {
 }
 
 class _ProjectsState extends State<Projects> {
-  List<Repo> _repos = List();
+  List<ProjectsRepo> _repos = List();
   bool _isFetching = false;
   String _error;
 
@@ -47,33 +47,7 @@ class _ProjectsState extends State<Projects> {
 
   @override
   Widget build(BuildContext context) {
-    final title = 'Teste';
-
-    return MaterialApp(
-      title: title,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: ListView(
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.map),
-              title: Text('Map'),
-            ),
-            ListTile(
-              leading: Icon(Icons.photo_album),
-              title: Text('Album'),
-            ),
-            ListTile(
-              leading: Icon(Icons.phone),
-              title: Text('Phone'),
-            ),
-          ],
-        ),
-      ),
-    );
-    /*return Scaffold(
+    return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, isInnerBoxScroll) {
           return [
@@ -114,7 +88,7 @@ class _ProjectsState extends State<Projects> {
         },
         body: buildBody(context),
       )
-    );*/
+    );
   }
 
   Widget buildBody(BuildContext context) {
@@ -135,7 +109,7 @@ class _ProjectsState extends State<Projects> {
         padding: EdgeInsets.symmetric(vertical: 8.0),
         itemCount: _repos.length,
         itemBuilder: (BuildContext context, int index) {
-          return GithubItem(_repos[index]);
+          return GithubItemProj(_repos[index]);
         },
       );
     }
