@@ -32,6 +32,7 @@ class UserModel {
     this.following,
     this.publicRepos,
     this.publicGists,
+    this.reposUrl,
   });
 
   String username;
@@ -44,6 +45,7 @@ class UserModel {
   int following;
   int publicRepos;
   int publicGists;
+  String reposUrl;
 
   UserModel.fromJson(Map json) {
     username = json['login'];
@@ -56,6 +58,7 @@ class UserModel {
     following = json['following'];
     publicRepos = json['public_repos'];
     publicGists = json['public_gists'];
+    reposUrl = json['repos_url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -70,6 +73,7 @@ class UserModel {
       'following': following,
       'publicRepos': publicRepos,
       'publicGists': publicGists,
+      'reposUrl': reposUrl,
     };
   }
 }
