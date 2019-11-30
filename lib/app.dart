@@ -118,7 +118,8 @@ class _MyHomePageState extends State<MyHomePage>
                         fit: BoxFit.fitWidth)),
                 accountEmail: Text(userData['email'] ?? 'Email not provided',
                     style: TextStyle(color: Colors.grey[100], fontSize: 15)),
-                accountName: Text(userData['username'] ?? 'User name not provided',
+                accountName: Text(
+                    userData['username'] ?? 'User name not provided',
                     style: TextStyle(color: Colors.grey[100], fontSize: 15)),
                 currentAccountPicture: CircleAvatar(
                   radius: 30.0,

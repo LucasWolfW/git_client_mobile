@@ -118,11 +118,10 @@ class _ProfilePageState extends State<ProfilePage> {
     } else if (createdAt == null) {
       return Text("Blog not provided");
     } else {
-      if (createdAt.contains("T")){}
-      createdAt = createdAt.replaceAll('T', ' ').replaceAll('Z', '');
-      return Text(
-          createdAt ??
-              "Created at not provided");
+      if (createdAt.contains("T")) {
+        createdAt = createdAt.replaceAll('T', ' ').replaceAll('Z', '');
+      }
+      return Text(createdAt ?? "Created at not provided");
     }
   }
 }

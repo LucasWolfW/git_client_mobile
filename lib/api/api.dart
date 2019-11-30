@@ -55,11 +55,11 @@ class Api {
     if (jsonResponse['errors'] != null) {
       return null;
     }
-    if (jsonResponse['owner'] == null) {
+    if (jsonResponse['items'] == null) {
       return List();
     }
 
-    return Repo.mapJSONStringToList(jsonResponse['{']);
+    return Repo.mapJSONStringToList(jsonResponse['items']);
   }
 
   static Future<List<ProjectsRepo>> getUserRepositories() async {
